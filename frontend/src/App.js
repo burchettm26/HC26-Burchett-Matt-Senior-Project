@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import RunsPage from "./RunsPage";
+
+function HomePage() {
+  return (
+    <div>
+      <h1>Home Page</h1>
+      <Link to="/runs">Go to Runs Page</Link>
+    </div>
+  );
+}
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-  fetch("https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev/")
-    .then((res) => res.json())
-    .then((data) => setMessage(data.message))
-    .catch((err) => {
-      console.error("Error:", err);
-      setMessage("Error connecting to backend");
-    });
-}, []);
-
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Frontend → Backend Connection Test</h1>
-      <p>{message}</p>
-    </div>
+    <Router>
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/runs" element={<RunsPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
