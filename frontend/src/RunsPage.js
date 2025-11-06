@@ -1,6 +1,4 @@
-// src/RunsPage.js
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getRuns } from "./api/runs";
 
 function RunsPage() {
@@ -34,7 +32,6 @@ function RunsPage() {
         <p>No runs found.</p>
       )}
 
-      <Link to="/">Back to Home</Link>
     </div>
   );
 }
