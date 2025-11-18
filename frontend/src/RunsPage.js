@@ -5,7 +5,7 @@ const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev"
 
 function RunsPage() {
   const [runs, setRuns] = useState([]);
-  const [formData, setFormData] = useState({ name: "", total_time: "", distance: "" });
+  const [formData, setFormData] = useState({ name: "", date: "", total_time: "", distance: "" });
 
   // Loading all runs
   useEffect(() => {
@@ -33,11 +33,8 @@ function RunsPage() {
 
       if (!res.ok) throw new Error("Failed to add run");
 
-      const data = await res.json();
+      //const data = await res.json();
       alert("✅ Run added successfully!");
-
-      // Add new run to list immediately
-      setRuns([...runs, data.run]);
 
       // Reset form
       setFormData({ name: "", total_time: "", distance: "" });
@@ -53,18 +50,17 @@ function RunsPage() {
 
       <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <input
-          type="text"
-          name="name"
-          placeholder="Run name"
-          value={formData.name}
+          type="datetime-local"
+          name="date"
+          value={formData.date}
           onChange={handleChange}
           required
         />
         <input
           type="text"
-          name="total_time"
-          placeholder="Time (HH:MM:SS)"
-          value={formData.total_time}
+          name="name"
+          placeholder="Run name"
+          value={formData.name}
           onChange={handleChange}
           required
         />
@@ -77,6 +73,15 @@ function RunsPage() {
           step="0.01"
           required
         />
+        <input
+          type="text"
+          name="total_time"
+          placeholder="Time (HH:MM:SS)"
+          value={formData.total_time}
+          onChange={handleChange}
+          required
+          pattern="^([0-1]?\d|2[0-3]):[0-5]\d:[0-5]\d$"
+        />
         <button type="submit">Add Run</button>
       </form>
 
@@ -85,7 +90,7 @@ function RunsPage() {
         <ul style={{ listStyleType: "none", padding: 0 }}>
           {runs.map((run) => (
             <li key={run.id}>
-              {run.name} — {run.distance} mi — {run.total_time} — {run.status}
+              {run.date} — {run.name} — {run.distance} mi — {run.total_time} — {run.pace} — {run.status}
             </li>
           ))}
         </ul>
