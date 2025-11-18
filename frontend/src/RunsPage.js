@@ -3,6 +3,22 @@ import { getRuns } from "./api/runs";
 
 const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
 
+const th = {
+  borderBottom: "2px solid black",
+  padding: "10px",
+  background: "#f2f2f2",
+};
+
+const td = {
+  padding: "10px",
+  borderBottom: "1px solid #ccc",
+  textAlign: "center",
+};
+
+const tr = {
+  backgroundColor: "white",
+};
+
 function RunsPage() {
   const [runs, setRuns] = useState([]);
   const [formData, setFormData] = useState({ name: "", date: "", total_time: "", distance: "" });
@@ -87,13 +103,29 @@ function RunsPage() {
 
       <h1>My Runs</h1>
       {runs.length > 0 ? (
-        <ul style={{ listStyleType: "none", padding: 0 }}>
+        <table className="runs-table" style={{ margin: "0 auto", borderCollapse: "collapse", width: "80%" }}>
+          <thead>
+            <tr>
+              <th style={th}>Date</th>
+              <th style={th}>Name</th>
+              <th style={th}>Distance (mi)</th>
+              <th style={th}>Total Time</th>
+              <th style={th}>Pace</th>
+            </tr>
+          </thead>
+
+        <tbody>
           {runs.map((run) => (
-            <li key={run.id}>
-              {run.date} — {run.name} — {run.distance} mi — {run.total_time} — {run.pace} — {run.status}
-            </li>
+            <tr key={run.id} style={tr}>
+              <td style={td}>{run.date}</td>
+              <td style={td}>{run.name}</td>
+              <td style={td}>{run.distance}</td>
+              <td style={td}>{run.total_time}</td>
+              <td style={td}>{run.pace}</td>
+            </tr>
           ))}
-        </ul>
+        </tbody>
+      </table>
       ) : (
         <p>No runs found.</p>
       )}
