@@ -8,7 +8,7 @@
  *
  * Responsibilities:
  * - Configure React Router for page navigation.
- * - Render the main site header and navigation bar.
+ * - Render the navigation bar with site title/logo.
  * - Provide routes for Home and Runs pages.
  *
  * Key Components:
@@ -42,11 +42,26 @@ function HomePage() {
 function App() {
   return (
     <Router>
-      <header style={{ backgroundColor: "#282c34", padding: "10px", color: "white", textAlign: "center" }}>
+      {/* <header style={{ backgroundColor: "#282c34", padding: "10px", color: "white", textAlign: "center" }}>
         <h1>Mood & Running Task Tracker</h1>
-      </header>
+      </header> */}
 
-      <nav style={{ background: "#79ddffff", padding: "15px", textAlign: "center" }}>
+      <nav style={{ background: "#79ddffff", 
+      padding: "15px 30px", 
+      textAlign: "center", 
+      display: "flex",
+      alignItems: "center",}}>
+
+        <h1 style={{ margin: 0, 
+          fontSize: "30px", 
+          color: "white", 
+          backgroundColor: "#000000ff",
+          padding: "8px 14px",             // inside spacing
+          borderRadius: "8px",              // rounded corners
+          display: "inline-block",}}>
+          M&RTT
+        </h1>
+
         <NavLink
           to="/"
           end

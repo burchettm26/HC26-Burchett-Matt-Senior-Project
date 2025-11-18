@@ -36,6 +36,7 @@ import { getRuns } from "./api/runs";
 
 const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
 
+// Inline styles for table elements, going to move to a CSS file later
 const th = {
   borderBottom: "2px solid black",
   padding: "10px",
