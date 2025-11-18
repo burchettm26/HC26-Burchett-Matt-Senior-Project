@@ -24,7 +24,7 @@ class Run(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "date": self.date.strftime("%Y-%m-%d %H:%M:%S"),
+            "date": self.date.strftime("%b %d, %Y %I:%M %p"),
             "distance": self.distance,
             "total_time": self.total_time,
             "pace": self.calculate_pace(),
