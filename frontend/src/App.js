@@ -1,3 +1,32 @@
+/**
+ * File: App.js
+ *
+ * Description:
+ * Main React application entry point responsible for setting up routing, layout,
+ * navigation, and page structure. Defines the top navigation bar and routes to
+ * both the home page and the RunsPage component.
+ *
+ * Responsibilities:
+ * - Configure React Router for page navigation.
+ * - Render the main site header and navigation bar.
+ * - Provide routes for Home and Runs pages.
+ *
+ * Key Components:
+ * - App: Wrapper component with router and layout.
+ * - HomePage: Simple landing page for the app.
+ * - RunsPage: Imported component for managing run data.
+ *
+ * Dependencies:
+ * - React
+ * - react-router-dom (Router, Routes, Route, NavLink)
+ *
+ * Notes:
+ * - Uses inline styles for navigation bar and header.
+ *
+ * Author: Matt Burchett
+ * Last Modified: 2025-11-18
+ */
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import RunsPage from "./RunsPage";

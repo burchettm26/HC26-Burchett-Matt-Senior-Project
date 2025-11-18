@@ -1,3 +1,24 @@
+/**
+ * File: runs.js
+ *
+ * Description:
+ * Provides helper functions for interacting with the backend API for run data.
+ * This file currently includes functionality to fetch all runs from the server.
+ *
+ * Responsibilities:
+ * - Define the backend base URL.
+ * - Export API functions that communicate with the Flask backend.
+ * - Handle errors during API requests and provide fallback behavior.
+ *
+ * Key Functions:
+ * - getRuns(): Fetches all runs from /api/runs and returns them as JSON.
+ *
+ * Dependencies:
+ * - fetch API (native)
+ *
+ * Author: Matt Burchett
+ * Last Modified: 2025-11-18
+ */
 const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
 
 export async function getRuns() {

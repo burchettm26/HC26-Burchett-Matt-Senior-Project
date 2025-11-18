@@ -1,3 +1,39 @@
+"""
+File: models.py
+
+Description:
+Defines the SQLAlchemy database models for the Running Tracker application.
+Contains the Run model, which represents a single running activity and includes
+logic for serializing run data and calculating running pace based on time and
+distance.
+
+Responsibilities:
+- Initialize and provide the SQLAlchemy database instance.
+- Define the Run model with its fields and database schema.
+- Offer helper methods to convert model instances to JSON-friendly dictionaries.
+- Provide pace calculation logic based on total_time and distance.
+
+Model: Run
+Fields:
+- id: Primary key
+- name: Run name
+- date: Datetime of run (defaults to UTC)
+- distance: Distance in miles (float)
+- total_time: String formatted as HH:MM:SS
+- status: Completion status (default "completed")
+
+Key Methods:
+- calculate_pace(): Computes pace per mile in mm:ss format.
+- to_dict(): Serializes the run instance for API responses.
+
+Dependencies:
+- flask_sqlalchemy
+- datetime
+
+Author: Matt Burchett
+Last Modified: 2025-11-18
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 

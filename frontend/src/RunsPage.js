@@ -1,3 +1,36 @@
+/**
+ * File: RunsPage.js
+ *
+ * Description:
+ * React page component for displaying and adding user runs. This component shows
+ * a form for entering run details and a table listing all existing runs from the
+ * backend API. The component fetches data on mount and handles state updates for
+ * both form input and run listing.
+ *
+ * Responsibilities:
+ * - Render a form allowing users to submit new run data.
+ * - Validate and send POST requests to the backend.
+ * - Fetch existing runs from the backend when the page loads.
+ * - Display run information in a styled table, including calculated pace.
+ *
+ * Key Components / Functions:
+ * - RunsPage: Main page component with form and table.
+ * - handleChange(): Updates form state on user input.
+ * - handleSubmit(): Sends POST /api/runs request to backend.
+ *
+ * Dependencies:
+ * - React (useState, useEffect)
+ * - getRuns() from ./api/runs
+ * - fetch API
+ *
+ * Notes:
+ * - Requires backend time format HH:MM:SS for successful submission.
+ * - Displays pace computed on the backend via Run model.
+ *
+ * Author: Matt Burchett
+ * Last Modified: 2025-11-18
+ */
+
 import React, { useEffect, useState } from "react";
 import { getRuns } from "./api/runs";
 
