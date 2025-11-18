@@ -33,8 +33,20 @@ import RunsPage from "./RunsPage";
 
 function HomePage() {
   return (
-    <div>
-      <h2>Welcome to the Mood & Running Task Tracker</h2>
+    <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "15px",
+      }}>
+      <div style = {{
+        backgroundColor: "#ff4646ff",       // box background
+        padding: "15px 25px",          // space inside box
+        borderRadius: "12px",          // rounded corners
+        boxShadow: "0 4px 10px rgba(0,0,0,0.15)", // soft shadow
+        textAlign: "center",}}>
+        <h2>Welcome to the Mood & Running Task Tracker!</h2>
+      </div>
     </div>
   );
 }
@@ -42,11 +54,8 @@ function HomePage() {
 function App() {
   return (
     <Router>
-      {/* <header style={{ backgroundColor: "#282c34", padding: "10px", color: "white", textAlign: "center" }}>
-        <h1>Mood & Running Task Tracker</h1>
-      </header> */}
 
-      <nav style={{ background: "#79ddffff", 
+      <nav style={{ background: "#939393ff",
       padding: "15px 30px", 
       textAlign: "center", 
       display: "flex",
@@ -54,8 +63,8 @@ function App() {
 
         <h1 style={{ margin: 0, 
           fontSize: "30px", 
-          color: "white", 
-          backgroundColor: "#000000ff",
+          color: "black", 
+          backgroundColor: "#ff4646ff",
           padding: "8px 14px",             // inside spacing
           borderRadius: "8px",              // rounded corners
           display: "inline-block",}}>
@@ -92,7 +101,7 @@ function App() {
 
       
 
-      <div style={{ textAlign: "center", marginTop: "10px" }}>
+      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/runs" element={<RunsPage />} />
