@@ -121,7 +121,12 @@ function RunsPage() {
 
       <h1>My Runs</h1>
       {runs.length > 0 ? (
-        <table className="runs-table" style={{ margin: "0 auto", borderCollapse: "collapse", width: "80%" }}>
+        <table className="runs-table" 
+        style={{ 
+        margin: "0 auto", 
+        borderCollapse: "collapse", 
+        width: "80%" 
+        }}>
           <thead>
             <tr>
               <th className="th">Date</th>

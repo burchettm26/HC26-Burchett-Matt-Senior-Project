@@ -39,10 +39,15 @@ function HomePage() {
         padding: "15px 25px",          // space inside box
         borderRadius: "12px",          // rounded corners
         boxShadow: "0 4px 10px rgba(0,0,0,0.15)", // soft shadow
-        textAlign: "center",}}>
+        textAlign: "center"
+        }}>
         <h2>Welcome to the Mood & Running Task Tracker!</h2>
       </div>
-      <p style={{ marginTop: "12px", fontSize: "18px", color: "black" }}>
+      <p style={{ 
+        marginTop: "12px", 
+        fontSize: "18px", 
+        color: "black" 
+        }}>
           Track your runs, monitor your progress, and stay motivated.
       </p>
 
@@ -60,7 +65,7 @@ function HomePage() {
             borderRadius: "10px",
             width: "350px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-            textAlign: "center",
+            textAlign: "center"
           }}
         >
           <h3 style={{ marginBottom: "10px" }}>Recent Activity</h3>
@@ -75,7 +80,7 @@ function HomePage() {
             width: "350px",
             minHeight: "250px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-            textAlign: "center",
+            textAlign: "center"
           }}
         >
           <h3 style={{ marginBottom: "10px" }}>Recent Mood</h3>

@@ -37,19 +37,23 @@ function App() {
   return (
     <Router>
 
-      <nav style={{ background: "#939393ff",
+      <nav style={{ 
+      background: "#939393ff",
       padding: "15px 30px", 
       textAlign: "center", 
       display: "flex",
-      alignItems: "center",}}>
+      alignItems: "center"
+      }}>
 
-        <h1 style={{ margin: 0, 
+        <h1 style={{ 
+          margin: 0, 
           fontSize: "30px", 
           color: "black", 
           backgroundColor: "#ff4646ff",
           padding: "8px 14px",             // inside spacing
           borderRadius: "8px",              // rounded corners
-          display: "inline-block",}}>
+          display: "inline-block"
+          }}>
           M&RTT
         </h1>
 
