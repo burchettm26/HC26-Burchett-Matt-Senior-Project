@@ -30,26 +30,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import RunsPage from "./api/RunsPage";
+import HomePage from "./home/HomePage";
 
-function HomePage() {
-  return (
-    <div style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "15px",
-      }}>
-      <div style = {{
-        backgroundColor: "#ff4646ff",       // box background
-        padding: "15px 25px",          // space inside box
-        borderRadius: "12px",          // rounded corners
-        boxShadow: "0 4px 10px rgba(0,0,0,0.15)", // soft shadow
-        textAlign: "center",}}>
-        <h2>Welcome to the Mood & Running Task Tracker!</h2>
-      </div>
-    </div>
-  );
-}
 
 function App() {
   return (
