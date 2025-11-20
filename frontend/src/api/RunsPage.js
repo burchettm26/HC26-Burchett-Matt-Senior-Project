@@ -34,8 +34,7 @@
 import React, { useEffect, useState } from "react";
 import { getRuns } from "./runs";
 import "./RunsPage.css";
-
-const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
+import { BASE_URL } from "./config";
 
 function RunsPage() {
   const [runs, setRuns] = useState([]);

@@ -19,7 +19,8 @@
  * Author: Matt Burchett
  * Last Modified: 11-19-2025
  */
-const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
+
+import { BASE_URL } from "./config";
 
 export async function getRuns() {
   try {
