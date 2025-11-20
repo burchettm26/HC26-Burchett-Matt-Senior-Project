@@ -27,11 +27,21 @@ from flask import Flask
 from flask_cors import CORS
 from models import db, Run
 from routes.runs_routes import runs_bp
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///runs.db"
+database_url = os.getenv("DATABASE_URL")
+
+if database_url:
+    # SQLAlchemy needs postgres:// replaced with postgresql://
+    database_url = database_url.replace("postgres://", "postgresql://")
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+else:
+    # Local development fallback
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///runs.db"
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
