@@ -29,7 +29,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
-import RunsPage from "./RunsPage";
+import RunsPage from "./api/RunsPage";
 
 function HomePage() {
   return (
@@ -98,8 +98,6 @@ function App() {
           Runs
         </NavLink>
       </nav>
-
-      
 
       <div>
         <Routes>
