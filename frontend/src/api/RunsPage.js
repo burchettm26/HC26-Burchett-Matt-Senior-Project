@@ -32,26 +32,10 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { getRuns } from "./api/runs";
+import { getRuns } from "./runs";
+import "./RunsPage.css";
 
 const BASE_URL = "https://symmetrical-spoon-5g7jwjjjp4fv4p9-5000.app.github.dev";
-
-// Inline styles for table elements, going to move to a CSS file later
-const th = {
-  borderBottom: "2px solid black",
-  padding: "10px",
-  background: "#f2f2f2",
-};
-
-const td = {
-  padding: "10px",
-  borderBottom: "1px solid #ccc",
-  textAlign: "center",
-};
-
-const tr = {
-  backgroundColor: "white",
-};
 
 function RunsPage() {
   const [runs, setRuns] = useState([]);
@@ -140,22 +124,22 @@ function RunsPage() {
         <table className="runs-table" style={{ margin: "0 auto", borderCollapse: "collapse", width: "80%" }}>
           <thead>
             <tr>
-              <th style={th}>Date</th>
-              <th style={th}>Name</th>
-              <th style={th}>Distance (mi)</th>
-              <th style={th}>Total Time</th>
-              <th style={th}>Pace</th>
+              <th className="th">Date</th>
+              <th className="th">Name</th>
+              <th className="th">Distance (mi)</th>
+              <th className="th">Total Time</th>
+              <th className="th">Pace</th>
             </tr>
           </thead>
 
         <tbody>
           {runs.map((run) => (
-            <tr key={run.id} style={tr}>
-              <td style={td}>{run.date}</td>
-              <td style={td}>{run.name}</td>
-              <td style={td}>{run.distance}</td>
-              <td style={td}>{run.total_time}</td>
-              <td style={td}>{run.pace}</td>
+            <tr key={run.id} className="tr">
+              <td className="td">{run.date}</td>
+              <td className="td">{run.name}</td>
+              <td className="td">{run.distance}</td>
+              <td className="td">{run.total_time}</td>
+              <td className="td">{run.pace}</td>
             </tr>
           ))}
         </tbody>
