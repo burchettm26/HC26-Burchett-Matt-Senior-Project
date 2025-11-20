@@ -24,7 +24,7 @@
  * - Uses inline styles for navigation bar and header.
  *
  * Author: Matt Burchett
- * Last Modified: 2025-11-18
+ * Last Modified: 11-19-2025
  */
 
 import React from "react";

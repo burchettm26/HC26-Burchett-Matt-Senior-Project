@@ -1,3 +1,31 @@
+"""
+File: runs_routes.py
+
+Description:
+Flask backend application for the running tracking portion of the project.
+Implements API routes for retrieving and creating run entries while managing
+database interactions through SQLAlchemy. Handles input validation for time
+format and date parsing, and ensures returned responses follow a structured API.
+
+Responsibilities:
+- Define backend API routes for GET and POST /api/runs.
+- Validate and parse request data before saving new runs.
+- Query the database and return serialized run data.
+
+Endpoints:
+- GET /api/runs : Returns a list of all run entries.
+- POST /api/runs : Validates input and adds a new run to the database.
+
+Dependencies:
+- Blueprint, request
+- db, Run from models.py
+- datetime
+- re (for HH:MM:SS time validation)
+
+Author: Matt Burchett
+Last Modified: 11-19-2025
+"""
+
 from flask import Blueprint, request
 from models import db, Run
 from datetime import datetime
