@@ -87,7 +87,7 @@ function RunsPage() {
       alert("✅ Run added successfully!");
 
       // Reset form
-      setFormData({ name: "", total_time: "", distance: "" });
+      setFormData({ name: "", date: "", total_time: "", distance: "" });
     } catch (err) {
       console.error(err);
       alert("❌ Error adding run");
