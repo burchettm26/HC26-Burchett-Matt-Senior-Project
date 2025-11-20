@@ -48,11 +48,12 @@ db.init_app(app)
 
 app.register_blueprint(runs_bp)
 
+with app.app_context():
+        db.create_all()
+
 @app.route("/")
 def home():
     return {"message": "Hello from backend!"}
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()  # Creates the runs.db file automatically
     app.run(host="0.0.0.0", port=5000)
