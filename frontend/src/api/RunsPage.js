@@ -77,6 +77,21 @@ function RunsPage() {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/runs/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete run");
+      setRuns(runs.filter((run) => run.id !== id));
+      alert("✅ Run deleted successfully!");
+      
+    } catch (err) {
+      console.error(err);
+      alert("❌ Error deleting run");
+    }
+  }
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Add Run</h1>
@@ -133,6 +148,7 @@ function RunsPage() {
               <th className="th">Distance (mi)</th>
               <th className="th">Total Time</th>
               <th className="th">Pace</th>
+              <th className="th">Delete</th>
             </tr>
           </thead>
 
@@ -144,6 +160,21 @@ function RunsPage() {
               <td className="td">{run.distance}</td>
               <td className="td">{run.total_time}</td>
               <td className="td">{run.pace}</td>
+              <td className="td">
+                <button
+                  onClick={() => handleDelete(run.id)}
+                  style={{
+                    background: "red",
+                    color: "white",
+                    border: "none",
+                    padding: "6px 10px",
+                    cursor: "pointer",
+                    borderRadius: "6px",
+                  }}
+                  >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

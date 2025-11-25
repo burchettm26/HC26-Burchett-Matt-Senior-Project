@@ -66,3 +66,13 @@ def add_run():
     db.session.add(new_run)
     db.session.commit()
     return {"message": "Run added successfully", "run": new_run.to_dict()}, 201
+
+@runs_bp.route("/api/runs/<int:run_id>", methods=["DELETE"])
+def delete_run(run_id):
+    run = Run.query.get(run_id)
+    if not run:
+        return {"error": "Run not found"}, 404
+
+    db.session.delete(run)
+    db.session.commit()
+    return {"message": "Run deleted successfully"}, 200
