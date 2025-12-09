@@ -22,6 +22,9 @@ Fields:
 - total_time: String formatted as HH:MM:SS
 - status: Completion status (default "completed")
 
+Model: Mood
+Fields:
+
 Key Methods:
 - calculate_pace(): Computes pace per mile in mm:ss format.
 - to_dict(): Serializes the run instance for API responses.
@@ -65,4 +68,16 @@ class Run(db.Model):
             "total_time": self.total_time,
             "pace": self.calculate_pace(),
             "status": self.status,
+        }
+
+class Mood(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    mood = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "mood": self.mood,
+            "date": self.date.strftime("%b %d, %Y %I:%M %p"),
         }
