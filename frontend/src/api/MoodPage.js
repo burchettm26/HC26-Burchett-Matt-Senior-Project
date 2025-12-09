@@ -3,30 +3,132 @@ import { BASE_URL } from "./config";
 
 function MoodPage() {
   const [moods, setMoods] = useState([]);
+  const [formData, setFormData] = useState({ positivity_level: "", stress_level: "", energy_level: "", calmness_level: "", motivation_level: "" });
 
   // Loading all moods
   useEffect(() => {
     fetch(`${BASE_URL}/api/mood`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch moods");
-        return res.json();
-      })
-      .then((data) => {
-        setMoods(data.moods);
-      })
-      .catch((err) => {
-        console.error("Error fetching moods:", err);
-        setMoods([]);
+      .then((res) => res.json())
+      .then((data) => setMoods(data.moods));
+    }, []);
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    // Convert strings → integers
+    const payload = {
+      positivity_level: Number(formData.positivity_level),
+      stress_level: Number(formData.stress_level),
+      energy_level: Number(formData.energy_level),
+      calmness_level: Number(formData.calmness_level),
+      motivation_level: Number(formData.motivation_level),
+    };
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/mood`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-  }, []);
+
+      if (!res.ok) throw new Error("Failed to add run");
+
+      alert("Survey submitted!");
+
+      // Clear inputs
+      setFormData({
+        positivity_level: "", stress_level: "", energy_level: "", calmness_level: "", motivation_level: ""});
+      } catch (err) {
+        console.error(err);
+        alert("Error submitting survey");
+      }
+  };
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Mood Entries</h1>
+      <h1>Mood Survey</h1>
+      <p style={{ marginBottom: "20px" }}>Fill out your daily mood survey!</p>
+
+      <form onSubmit={handleSubmit} style={{ marginBottom: "30px" }}>
+        <div>
+          <label>
+            Positivity Level (1-10):
+            <input 
+            type="number" 
+            name="positivity_level" 
+            value={formData.positivity_level}
+            min="1" 
+            max="10"
+            onChange={handleChange} 
+            required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Stress Level (1-10):
+            <input 
+            type="number" 
+            name="stress_level"
+            value={formData.stress_level}
+            min="1" 
+            max="10" 
+            onChange={handleChange}
+            required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Energy Level (1-10):
+            <input 
+            type="number" 
+            name="energy_level" 
+            value={formData.energy_level}
+            min="1" 
+            max="10" 
+            onChange={handleChange}
+            required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Calmness Level (1-10):
+            <input 
+            type="number" 
+            name="calmness_level" 
+            value={formData.calmness_level}
+            min="1" 
+            max="10" 
+            onChange={handleChange}
+            required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Motivation Level (1-10):
+            <input 
+            type="number" 
+            name="motivation_level"
+            value={formData.motivation_level}
+            min="1" 
+            max="10"
+            onChange={handleChange} 
+            required />
+          </label>
+        </div>
+        <button type="submit">Submit Mood</button>
+      </form>
+      <h1>My Moods</h1>
       <ul>
         {moods.map((mood) => (
           <li key={mood.id}>
-            Date: {mood.date}, Mood: {mood.mood_level}
+            {mood.date}<br />
+            Positivity: {mood.positivity_level}, Stress: {mood.stress_level},
+            Energy: {mood.energy_level}, Calmness: {mood.calmness_level},
+            Motivation: {mood.motivation_level}
           </li>
         ))}
       </ul>
