@@ -39,8 +39,14 @@ Last Modified: 11-19-2025
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz
 
 db = SQLAlchemy()
+
+
+def get_est_time():
+    est = pytz.timezone("America/New_York")
+    return datetime.now(est).replace(tzinfo=None)
 
 class Run(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,12 +78,20 @@ class Run(db.Model):
 
 class Mood(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    mood = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    positivity_level = db.Column(db.Integer, nullable=False)
+    stress_level = db.Column(db.Integer, nullable=False)
+    energy_level = db.Column(db.Integer, nullable=False)
+    calmness_level = db.Column(db.Integer, nullable=False)
+    motivation_level = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.DateTime, default=get_est_time)
 
     def to_dict(self):
         return {
             "id": self.id,
-            "mood": self.mood,
+            "positivity_level": self.positivity_level,
+            "stress_level": self.stress_level,
+            "energy_level": self.energy_level,
+            "calmness_level": self.calmness_level,
+            "motivation_level": self.motivation_level,
             "date": self.date.strftime("%b %d, %Y %I:%M %p"),
         }
