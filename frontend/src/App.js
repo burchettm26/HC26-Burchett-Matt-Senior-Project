@@ -31,6 +31,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import RunsPage from "./api/RunsPage";
 import HomePage from "./home/HomePage";
+import MoodPage from "./api/MoodPage";
 
 
 function App() {
@@ -83,12 +84,26 @@ function App() {
         >
           Runs
         </NavLink>
+        <NavLink
+          to="/mood"
+          end
+          style={({ isActive }) => ({
+            margin: "0 50px",
+            fontSize: "25px",
+            fontWeight: isActive ? "bold" : "normal",
+            color: isActive ? "black" : "white",
+            textDecoration: "none",
+          })}
+        >
+          Mood
+        </NavLink>
       </nav>
 
       <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/runs" element={<RunsPage />} />
+          <Route path="/mood" element={<MoodPage />} />
         </Routes>
       </div>
     </Router>
