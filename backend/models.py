@@ -39,14 +39,13 @@ Last Modified: 11-19-2025
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import pytz
+from zoneinfo import ZoneInfo
 
 db = SQLAlchemy()
 
 
 def get_est_time():
-    est = pytz.timezone("America/New_York")
-    return datetime.now(est).replace(tzinfo=None)
+    return datetime.now(ZoneInfo("America/New_York")).replace(tzinfo=None)
 
 class Run(db.Model):
     id = db.Column(db.Integer, primary_key=True)
