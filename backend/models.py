@@ -50,6 +50,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 db = SQLAlchemy()
+date_format = "%b %d, %Y %I:%M %p"
 
 
 def get_est_time():
@@ -76,7 +77,7 @@ class Run(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "date": self.date.strftime("%b %d, %Y %I:%M %p"),
+            "date": self.date.strftime(date_format),
             "distance": self.distance,
             "total_time": self.total_time,
             "pace": self.calculate_pace(),
@@ -100,5 +101,5 @@ class Mood(db.Model):
             "energy_level": self.energy_level,
             "calmness_level": self.calmness_level,
             "motivation_level": self.motivation_level,
-            "date": self.date.strftime("%b %d, %Y %I:%M %p"),
+            "date": self.date.strftime(date_format),
         }
