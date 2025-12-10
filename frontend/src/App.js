@@ -2,9 +2,10 @@
  * File: App.js
  *
  * Description:
- * Main React application entry point responsible for setting up routing, layout,
- * navigation, and page structure. Defines the top navigation bar and routes to
- * both the home page and the RunsPage component.
+ * Main React application component that sets up routing and navigation for the
+ * Running Tracker and Mood Tracker web app. This component uses React Router to
+ * define routes for different pages including Home, Runs, and Mood. It also
+ * includes a navigation bar for easy access to these pages.
  *
  * Responsibilities:
  * - Configure React Router for page navigation.
@@ -15,13 +16,18 @@
  * - App: Wrapper component with router and layout.
  * - HomePage: Simple landing page for the app.
  * - RunsPage: Imported component for managing run data.
+ * - MoodPage: Imported component for managing mood survey data.
  *
  * Dependencies:
  * - React
  * - react-router-dom (Router, Routes, Route, NavLink)
+ * - RunsPage from ./api/RunsPage
+ * - HomePage from ./home/HomePage
+ * - MoodPage from ./api/MoodPage
  *
  * Notes:
  * - Uses inline styles for navigation bar and header.
+ * - Navigation links highlight when active.
  *
  * Author: Matt Burchett
  * Last Modified: 11-19-2025

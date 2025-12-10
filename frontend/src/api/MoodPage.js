@@ -1,9 +1,46 @@
+/**
+ * File: MoodPage.js
+ *
+ * Description:
+ * React page component for displaying and adding user mood surveys. This component
+ * shows a form for entering mood details and a list of all existing mood entries
+ * from the backend API. The component fetches data on mount and handles state
+ * updates for both form input and mood listing.
+ *
+ * Responsibilities:
+ * - Render a form allowing users to submit new mood survey data.
+ * - Validate and send POST requests to the backend.
+ * - Fetch existing moods from the backend when the page loads.
+ * - Display mood information in a styled list.
+ *
+ * Key Components / Functions:
+ * - MoodPage: Main page component with form and list.
+ * - handleChange(): Updates form state on user input.
+ * - handleSubmit(): Sends POST /api/mood request to backend.
+ * 
+ * Dependencies:
+ * - React (useState, useEffect)
+ * - fetch API
+ *
+ * Notes:
+ * - Requires backend integer ratings for successful submission.
+ * - Displays mood entries fetched from the backend.
+ * 
+ * Author: Matt Burchett
+ * Last Modified: 12-9-2025
+ */
+
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "./config";
 
 function MoodPage() {
   const [moods, setMoods] = useState([]);
-  const [formData, setFormData] = useState({ positivity_level: "", stress_level: "", energy_level: "", calmness_level: "", motivation_level: "" });
+  const [formData, setFormData] = useState({ 
+    positivity_level: "", 
+    stress_level: "", 
+    energy_level: "", 
+    calmness_level: "", 
+    motivation_level: "" });
 
   // Loading all moods
   useEffect(() => {
@@ -41,7 +78,11 @@ function MoodPage() {
 
       // Clear inputs
       setFormData({
-        positivity_level: "", stress_level: "", energy_level: "", calmness_level: "", motivation_level: ""});
+        positivity_level: "", 
+        stress_level: "", 
+        energy_level: "", 
+        calmness_level: "", 
+        motivation_level: ""});
       } catch (err) {
         console.error(err);
         alert("Error submitting survey");
@@ -126,8 +167,10 @@ function MoodPage() {
         {moods.map((mood) => (
           <li key={mood.id}>
             {mood.date}<br />
-            Positivity: {mood.positivity_level}, Stress: {mood.stress_level},
-            Energy: {mood.energy_level}, Calmness: {mood.calmness_level},
+            Positivity: {mood.positivity_level}, 
+            Stress: {mood.stress_level},
+            Energy: {mood.energy_level}, 
+            Calmness: {mood.calmness_level},
             Motivation: {mood.motivation_level}
           </li>
         ))}

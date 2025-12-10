@@ -2,8 +2,9 @@
 File: app.py
 
 Description:
-Main Flask backend application for the Running & Mood Tracker project.
-Implements the homepage route and integrates the runs API routes from runs_routes.py.
+Flask backend application for the Running Tracker and Mood Tracker project.
+Implements API routes for managing runs and moods while handling database
+interactions through SQLAlchemy. Configures CORS for cross-origin requests.
 
 Responsibilities:
 - Configure Flask, CORS, and SQLAlchemy.
@@ -18,9 +19,10 @@ Dependencies:
 - CORS from flask_cors
 - db, Run from models.py
 - runs_bp from routes/runs_routes.py
+- mood_bp from routes/mood_routes.py
 
 Author: Matt Burchett
-Last Modified: 11-19-2025
+Last Modified: 12-9-2025
 """
 
 from flask import Flask

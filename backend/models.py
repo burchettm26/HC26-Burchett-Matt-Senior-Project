@@ -2,16 +2,16 @@
 File: models.py
 
 Description:
-Defines the SQLAlchemy database models for the Running Tracker application.
-Contains the Run model, which represents a single running activity and includes
-logic for serializing run data and calculating running pace based on time and
-distance.
+Flask backend application models for the Running Tracker and Mood Tracker project.
+Implements SQLAlchemy models for Run and Mood entries, defining their database
+schemas and helper methods for serialization and pace calculation.
 
 Responsibilities:
 - Initialize and provide the SQLAlchemy database instance.
 - Define the Run model with its fields and database schema.
 - Offer helper methods to convert model instances to JSON-friendly dictionaries.
 - Provide pace calculation logic based on total_time and distance.
+- Define the Mood model with its fields and database schema.
 
 Model: Run
 Fields:
@@ -24,6 +24,13 @@ Fields:
 
 Model: Mood
 Fields:
+- id: Primary key
+- positivity_level: Integer rating
+- stress_level: Integer rating
+- energy_level: Integer rating
+- calmness_level: Integer rating
+- motivation_level: Integer rating Integer rating
+- date: Datetime of mood entry (defaults to EST)
 
 Key Methods:
 - calculate_pace(): Computes pace per mile in mm:ss format.
@@ -32,9 +39,10 @@ Key Methods:
 Dependencies:
 - flask_sqlalchemy
 - datetime
+- zoneinfo
 
 Author: Matt Burchett
-Last Modified: 11-19-2025
+Last Modified: 12-9-2025
 """
 
 from flask_sqlalchemy import SQLAlchemy

@@ -1,3 +1,28 @@
+'''
+File: mood_routes.py
+
+Description:
+Flask backend application for the mood tracking portion of the project.
+Implements API routes for retrieving and creating mood entries while managing
+database interactions through SQLAlchemy. Ensures returned responses follow a
+structured API.
+
+Responsibilities:
+- Define backend API routes for GET and POST /api/mood.
+- Query the database and return serialized mood data.
+
+Endpoints:
+- GET /api/mood : Returns a list of all mood entries.
+- POST /api/mood : Adds a new mood entry to the database.
+
+Dependencies:
+- Blueprint, request
+- db, Mood from models.py
+
+Author: Matt Burchett
+Last Modified: 12-9-2025
+'''
+
 from flask import Blueprint, request
 from models import db, Mood
 
