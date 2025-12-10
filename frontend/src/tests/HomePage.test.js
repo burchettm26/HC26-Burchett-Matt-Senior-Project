@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HomePage from "../src/home/HomePage";
+import HomePage from "../home/HomePage.js";
 
 test("renders homepage welcome text", () => {
   render(<HomePage />);

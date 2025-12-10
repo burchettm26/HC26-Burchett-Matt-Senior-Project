@@ -1,9 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import RunsPage from "../src/api/RunsPage";
-import { getRuns } from "../src/api/runs";
+import RunsPage from "../api/RunsPage";
+import { getRuns } from "../api/runs";
 
-jest.mock("../src/api/runs"); // mock getRuns
-global.fetch = jest.fn();     // mock fetch
+jest.mock("../api/runs");
+global.fetch = jest.fn();
+global.alert = jest.fn();
 
 beforeEach(() => {
   getRuns.mockResolvedValue({
@@ -19,10 +20,14 @@ beforeEach(() => {
     ]
   });
 });
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 test("loads and displays runs", async () => {
   render(<RunsPage />);
 
+  // Wait for async load
   const row = await screen.findByText("Test Run");
   expect(row).toBeInTheDocument();
 });
@@ -32,24 +37,30 @@ test("submits a new run", async () => {
 
   render(<RunsPage />);
 
+  // Wait for initial fetch of runs
+  await screen.findByText("Test Run");
+
   fireEvent.change(screen.getByPlaceholderText("Run name"), {
     target: { value: "My New Run" }
   });
+
   fireEvent.change(screen.getByPlaceholderText("Distance (miles)"), {
     target: { value: "2" }
   });
+
   fireEvent.change(screen.getByPlaceholderText("Time (HH:MM:SS)"), {
     target: { value: "00:20:00" }
   });
 
-  // Fill date
-  fireEvent.change(screen.getByLabelText(/add run/i, { selector: "input[type=datetime-local]" }) || 
-    screen.getByRole("textbox", { name: /date/i })
-  , {
+  const dateInput = screen.getByDisplayValue("") || 
+    document.querySelector("input[type=datetime-local]") ||
+    document.querySelector("input[type=date]");
+  
+  fireEvent.change(dateInput, {
     target: { value: "2025-01-02T12:00" }
   });
 
-  fireEvent.click(screen.getByText("Add Run"));
+  fireEvent.click(screen.getByRole("button", { name: /Add Run/i }));
 
   await waitFor(() => {
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -57,14 +68,39 @@ test("submits a new run", async () => {
 });
 
 test("deletes a run", async () => {
+  // FIRST: mock initial load of runs
+  getRuns.mockResolvedValueOnce({
+    runs: [
+      {
+        id: 1,
+        date: "2025-01-01",
+        name: "Test Run",
+        distance: 3.5,
+        total_time: "00:30:00",
+        pace: "8:34"
+      }
+    ]
+  });
+
+  // Mock DELETE request
   fetch.mockResolvedValueOnce({ ok: true });
+
+  // Mock re-fetch after delete
+  getRuns.mockResolvedValueOnce({ runs: [] });
 
   render(<RunsPage />);
 
-  const deleteButton = await screen.findByText("Delete");
-  fireEvent.click(deleteButton);
+  // Wait for initial list to appear
+  await screen.findByText("Test Run");
+
+  const deleteBtn = await screen.findAllByRole("button", { name: /Delete/i });
+  fireEvent.click(deleteBtn[0]);
 
   await waitFor(() => {
-    expect(fetch).toHaveBeenCalledWith(expect.stringContaining("/api/runs/1"), expect.any(Object));
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining("/api/runs/1"),
+      expect.any(Object)
+    );
   });
 });
+

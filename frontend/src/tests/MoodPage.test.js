@@ -1,7 +1,9 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import MoodPage from "../src/api/MoodPage";
+import MoodPage from "../api/MoodPage.js";
+
 
 global.fetch = jest.fn();
+global.alert = jest.fn();
 
 beforeEach(() => {
   fetch.mockResolvedValueOnce({
