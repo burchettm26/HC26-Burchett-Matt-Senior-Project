@@ -113,3 +113,55 @@ def test_get_runs_after_adding():
     assert res.status_code == 200
     assert len(res.json["runs"]) == 1
     assert res.json["runs"][0]["name"] == "Evening Run"
+
+# Additional tests for mood routes can be added similarly
+
+def test_add_mood_success():
+    client = app.test_client()
+
+    data = {
+        "positivity_level": 8,
+        "stress_level": 3,
+        "energy_level": 7,
+        "calmness_level": 6,
+        "motivation_level": 9
+    }
+
+    res = client.post("/api/mood", json=data)
+
+    assert res.status_code == 201
+    assert res.json["message"] == "Mood added successfully"
+    assert res.json["mood"]["positivity_level"] == 8
+    assert res.json["mood"]["stress_level"] == 3
+    assert res.json["mood"]["energy_level"] == 7
+    assert res.json["mood"]["calmness_level"] == 6
+    assert res.json["mood"]["motivation_level"] == 9
+
+def test_get_moods_empty():
+    client = app.test_client()
+    res = client.get("/api/mood")
+    assert res.status_code == 200
+    assert res.json["moods"] == []
+
+def test_get_moods_after_adding():
+    client = app.test_client()
+
+    # Add mood
+    client.post("/api/mood", json={
+        "positivity_level": 5,
+        "stress_level": 4,
+        "energy_level": 6,
+        "calmness_level": 5,
+        "motivation_level": 7
+    })
+
+    # Get moods
+    res = client.get("/api/mood")
+
+    assert res.status_code == 200
+    assert len(res.json["moods"]) == 1
+    assert res.json["moods"][0]["positivity_level"] == 5
+    assert res.json["moods"][0]["stress_level"] == 4
+    assert res.json["moods"][0]["energy_level"] == 6
+    assert res.json["moods"][0]["calmness_level"] == 5
+    assert res.json["moods"][0]["motivation_level"] == 7
